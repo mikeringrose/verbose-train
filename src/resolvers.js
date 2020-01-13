@@ -1,9 +1,18 @@
 module.exports = {
   Query: { 
-    async mapServer (parentValue, { url }, context) {
+    async featureService (parentValue, { url }, context) {
       const { services: { featureService } } = context
       context.serviceUrl = url
       return featureService.get(url)
+    }
+  },
+  FeatureService: {
+    capabilities ({ capabilities }, args, context) {
+      if (capabilities.length) {
+        return capabilities.split(',').map(c => c.toLowerCase())
+      }
+
+      return []
     }
   },
   Layer: {

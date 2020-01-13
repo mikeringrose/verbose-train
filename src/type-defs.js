@@ -2,15 +2,18 @@ const gql = require('graphql-tag');
 
 module.exports = gql`
   type Query {
-    mapServer(url: String!): MapServer
+    featureService(url: String!): FeatureService
   }
 
-  type MapServer {
+  type FeatureService {
     serviceUrl: ID!
     mapName: String!
     currentVersion: Float!
     serviceDescription: String
-    layers: [Layer]
+    initialExtent: Extent
+    fullExtent: Extent
+    capabilities: [String]
+    layers: [LayerSummary]
   }
 
   type LayerSummary {
